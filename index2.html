@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت شخصی</title>
+    
+    <!-- لینک فونت اووسام برای آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ======= استایل کلی سایت ======= */
+        body {
+            margin: 0;
+            font-family: 'Tahoma', sans-serif;
+            background-color: #121212; /* پس‌زمینه تیره */
+            color: #FFD700; /* متن طلایی */
+        }
+
+        /* ======= هدر ======= */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1e1e1e;
+        }
+
+        header h1 {
+            font-size: 22px;
+        }
+
+        nav a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ======= اسلایدر ======= */
+        .slider {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 40px;
+            text-align: center;
+            background-color: #181818;
+        }
+
+        .slide h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .slide p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .slide a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #121212;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* ======= نمونه کارها ======= */
+        .portfolio {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .portfolio h2 {
+            margin-bottom: 20px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .project {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* ======= فوتر ======= */
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .social a {
+            color: #FFD700;
+            font-size: 22px;
+            margin: 0 10px;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* ======= ریسپانسیو ======= */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======= هدر ======= -->
+    <header>
+        <h1>لوگوی من</h1>
+        <nav>
+            <a href="#">خانه</a>
+            <a href="#">نمونه کارها</a>
+            <a href="#">تماس</a>
+        </nav>
+    </header>
+
+    <!-- ======= اسلایدر ======= -->
+    <div class="slider">
+        <div class="slides">
+            <!-- اسلاید 1 -->
+            <div class="slide">
+                <h2>عنوان اسلاید 1</h2>
+                <p>این یک متن نمونه برای اسلاید اول است.</p>
+                <a href="#">بیشتر بدانید</a>
+            </div>
+            <!-- اسلاید 2 -->
+            <div class="slide">
+                <h2>عنوان اسلاید 2</h2>
+                <p>این یک متن نمونه برای اسلاید دوم است.</p>
+                <a href="#">شروع کنید</a>
+            </div>
+            <!-- اسلاید 3 -->
+            <div class="slide">
+                <h2>عنوان اسلاید 3</h2>
+                <p>این یک متن نمونه برای اسلاید سوم است.</p>
+                <a href="#">تماس بگیرید</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= نمونه کارها ======= -->
+    <section class="portfolio">
+        <h2>نمونه کارها</h2>
+        <div class="projects">
+            <div class="project">نمونه کار 1</div>
+            <div class="project">نمونه کار 2</div>
+            <div class="project">نمونه کار 3</div>
+        </div>
+    </section>
+
+    <!-- ======= فوتر ======= -->
+    <footer>
+        <div class="social">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="contact-info">
+            <p>📞 09123456789</p>
+            <p>✉ example@email.com</p>
+        </div>
+    </footer>
+
+    <!-- ======= اسکریپت اسلایدر ======= -->
+    <script>
+        // انتخاب اسلایدها
+        const slides = document.querySelector('.slides');
+        const slideCount = document.querySelectorAll('.slide').length;
+        let index = 0;
+
+        // تابع تغییر اسلاید
+        function showNextSlide() {
+            index = (index + 1) % slideCount; // اگر به آخر رسیدیم برگرد به اول
+            slides.style.transform = `translateX(-${index * 100}%)`; // حرکت اسلاید
+        }
+
+        // تغییر اسلاید هر 3 ثانیه
+        setInterval(showNextSlide, 3000);
+    </script>
+
+</body>
+</html>

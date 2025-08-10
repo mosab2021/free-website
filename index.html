@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمونه کارهای من | نام شما</title>
+    <style>
+        /* ==================== RESET & BASE STYLES ==================== */
+        /* Reset تمام استایل‌های پیش‌فرض مرورگر */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* استایل‌های پایه برای بدنه سایت */
+        body {
+            font-family: 'Vazir', 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.8;
+            background-color: #121212; /* پس‌زمینه تاریک */
+            color: #e0e0e0; /* متن روشن */
+            min-height: 100vh;
+        }
+
+        /* ==================== VARIABLES ==================== */
+        /* تعریف متغیرهای رنگ برای تم طلایی */
+        :root {
+            --gold: #FFD700; /* رنگ طلایی اصلی */
+            --dark-gold: #C5A42B; /* رنگ طلایی تیره */
+            --black: #121212; /* مشکی */
+            --dark-gray: #1E1E1E; /* خاکستری تیره */
+            --light-gray: #2D2D2D; /* خاکستری روشن */
+            --transition: all 0.3s ease; /* انیمیشن پیش‌فرض */
+        }
+
+        /* ==================== HEADER ==================== */
+        /* استایل بخش هدر سایت */
+        header {
+            background: linear-gradient(to bottom, #1a1a1a 0%, #121212 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--dark-gold);
+        }
+
+        /* خط طلایی زیر هدر */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* استایل لوگو */
+        .logo {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+        }
+
+        /* استایل توضیح کوتاه زیر لوگو */
+        .tagline {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ==================== SLIDER ==================== */
+        /* استایل بخش اسلایدر */
+        .slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* استایل اسلایدها */
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 400px;
+        }
+
+        /* استایل هر اسلاید */
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        /* تصویر پس‌زمینه اسلاید */
+        .slide-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+
+        /* محتوای اسلاید */
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            color: white;
+            z-index: 2;
+        }
+
+        /* عنوان اسلاید */
+        .slide-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* متن اسلاید */
+        .slide-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* دکمه اسلاید */
+        .slide-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .slide-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* دکمه‌های کنترل اسلایدر */
+        .slider-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .slider-control:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* نقاط نشانگر اسلاید */
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        /* استایل کانتینر اصلی */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* استایل بخش‌های اصلی */
+        .section {
+            padding: 3rem 0;
+        }
+
+        /* عنوان بخش‌ها */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gold);
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        /* خط زیر عنوان بخش‌ها */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* جداکننده طلایی */
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+            width: 80%;
+            box-shadow: 0 0 5px var(--gold);
+        }
+
+        /* ==================== PORTFOLIO ==================== */
+        /* استایل گالری نمونه کارها */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* استایل هر کارت نمونه کار */
+        .portfolio-item {
+            background: var(--dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            border: 1px solid #333;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: var(--dark-gold);
+        }
+
+        /* استایل تصویر نمونه کار */
+        .portfolio-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            opacity: 0.8;
+        }
+
+        /* استایل محتوای کارت */
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        /* عنوان نمونه کار */
+        .portfolio-title {
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        /* توضیحات نمونه کار */
+        .portfolio-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        /* استایل دکمه‌ها */
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid var(--dark-gold);
+            margin-top: 0.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            color: #fff;
+        }
+
+        /* افکت درخشش طلایی روی دکمه */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(255, 215, 0, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .btn:hover::before {
+            animation: shine 1.5s;
+            opacity: 1;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+                top: -50%;
+            }
+            100% {
+                left: 150%;
+                top: 150%;
+            }
+        }
+
+        /* ==================== FOOTER ==================== */
+        /* استایل فوتر */
+        footer {
+            background: #0a0a0a;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #252525;
+        }
+
+        /* استایل کانتینر فوتر */
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* استایل بخش‌های فوتر */
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        /* عنوان بخش فوتر */
+        .footer-title {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        /* استایل لینک‌های فوتر */
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-right: 5px;
+        }
+
+        /* استایل آیکون‌های شبکه‌های اجتماعی */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--dark-gray);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* استایل کپی رایت */
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #252525;
+            color: #666;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        /* استایل‌های ریسپانسیو برای دستگاه‌های مختلف */
+        @media (max-width: 992px) {
+            /* تنظیمات برای تبلت */
+            .slide-title {
+                font-size: 1.8rem;
+            }
+            
+            .slide-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* تنظیمات برای موبایل */
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .slider {
+                height: 350px;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* تنظیمات برای موبایل‌های کوچک */
+            .slider {
+                height: 300px;
+            }
+            
+            .slide-title {
+                font-size: 1.3rem;
+            }
+            
+            .slide-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <h1 class="logo">نام شما</h1>
+        <p class="tagline">طراح و توسعه دهنده - تخصص در طراحی وب و رابط کاربری</p>
+    </header>
+
+    <!-- ==================== SLIDER ==================== -->
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <!-- اسلاید 1 -->
+            <div class="slide">
+                <img src="#1" alt="اسلاید 1" class="slide-bg">
+                <div class="slide-content">
+                    <h2 class="slide-title">عنوان اسلاید اول</h2>
+                    <p class="slide-text">این یک متن نمونه برای اسلاید اول است. می‌توانید این متن را با محتوای مورد نظر خود جایگزین کنید.</p>
+                    <a href="#" class="slide-btn">اطلاعات بیشتر</a>
+                </div>
+            </div>
+            
+            <!-- اسلاید 2 -->
+            <div class="slide">
+                <img src="#2" alt="اسلاید 2" class="slide-bg">
+                <div class="slide-content">
+                    <h2 class="slide-title">عنوان اسلاید دوم</h2>
+                    <p class="slide-text">این یک متن نمونه برای اسلاید دوم است. می‌توانید این متن را با محتوای مورد نظر خود جایگزین کنید.</p>
+                    <a href="#" class="slide-btn">مشاهده نمونه کارها</a>
+                </div>
+            </div>
+            
+            <!-- اسلاید 3 -->
+            <div class="slide">
+                <img src="#3" alt="اسلاید 3" class="slide-bg">
+                <div class="slide-content">
+                    <h2 class="slide-title">عنوان اسلاید سوم</h2>
+                    <p class="slide-text">این یک متن نمونه برای اسلاید سوم است. می‌توانید این متن را با محتوای مورد نظر خود جایگزین کنید.</p>
+                    <a href="#" class="slide-btn">تماس با من</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- دکمه‌های کنترل اسلایدر -->
+        <button class="slider-control prev" id="prev">&#10094;</button>
+        <button class="slider-control next" id="next">&#10095;</button>
+        
+        <!-- نقاط نشانگر اسلاید -->
+        <div class="slider-dots" id="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="container">
+        <!-- بخش درباره من -->
+        <section id="about" class="section">
+            <h2 class="section-title">درباره من</h2>
+            <div class="gold-divider"></div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+                اینجا می‌توانید توضیحاتی درباره خودتان، مهارت‌ها و تخصص‌هایتان بنویسید. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+            </p>
+        </section>
+
+        <!-- بخش نمونه کارها -->
+        <section id="portfolio" class="section">
+            <h2 class="section-title">نمونه کارها</h2>
+            <div class="gold-divider"></div>
+            
+            <div class="portfolio-grid">
+                <!-- نمونه کار 1 -->
+                <div class="portfolio-item">
+                    <img src="#Project+1" alt="پروژه نمونه 1" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">پروژه طراحی وب</h3>
+                        <p class="portfolio-desc">طراحی وبسایت شرکتی با تم مدرن و رابط کاربری پیشرفته. استفاده از تکنولوژی‌های HTML5, CSS3, JavaScript</p>
+                        <a href="#" class="btn">مشاهده پروژه</a>
+                    </div>
+                </div>
+                
+                <!-- نمونه کار 2 -->
+                <div class="portfolio-item">
+                    <img src="#Project+2" alt="پروژه نمونه 2" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">اپلیکیشن موبایل</h3>
+                        <p class="portfolio-desc">توسعه اپلیکیشن اندروید برای مدیریت پروژه با قابلیت‌های پیشرفته همکاری تیمی</p>
+                        <a href="#" class="btn">مشاهده پروژه</a>
+                    </div>
+                </div>
+                
+                <!-- نمونه کار 3 -->
+                <div class="portfolio-item">
+                    <img src="#Project+3" alt="پروژه نمونه 3" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">طراحی لوگو</h3>
+                        <p class="portfolio-desc">طراحی هویت بصری برند برای شرکت نوپا با مفاهیم مدرن و مینیمال</p>
+                        <a href="#" class="btn">مشاهده پروژه</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-container">
+            <!-- بخش درباره من در فوتر -->
+            <div class="footer-section">
+                <h3 class="footer-title">درباره من</h3>
+                <p style="color: #aaa; line-height: 1.7;">
+                    توضیح کوتاهی درباره خودتان و فعالیت‌های حرفه‌ای شما. این متن می‌تواند خلاصه‌ای از مهارت‌ها و تخصص‌های شما باشد.
+                </p>
+            </div>
+            
+            <!-- بخش لینک‌های سریع -->
+            <div class="footer-section">
+                <h3 class="footer-title">لینک‌های سریع</h3>
+                <ul class="footer-links">
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li><a href="#about">درباره من</a></li>
+                    <li><a href="#portfolio">نمونه کارها</a></li>
+                    <li><a href="#contact">تماس با من</a></li>
+                </ul>
+            </div>
+            
+            <!-- بخش تماس -->
+            <div class="footer-section">
+                <h3 class="footer-title">تماس با من</h3>
+                <ul class="footer-links">
+                    <li><a href="tel:+989123456789">شماره تماس: 09123456789</a></li>
+                    <li><a href="mailto:email@example.com">ایمیل: email@example.com</a></li>
+                    <li>آدرس: تهران، خیابان نمونه، پلاک ۱۲۳</li>
+                </ul>
+                
+                <!-- آیکون‌های شبکه‌های اجتماعی -->
+                <div class="social-links">
+                    <a href="https://wa.me/989123456789" class="social-link" target="_blank">&#x1F4AC;</a> <!-- واتساپ -->
+                    <a href="https://t.me/yourusername" class="social-link" target="_blank">&#x1F4E8;</a> <!-- تلگرام -->
+                    <a href="https://instagram.com/yourusername" class="social-link" target="_blank">&#x1F4F7;</a> <!-- اینستاگرام -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- کپی رایت -->
+        <div class="copyright">
+            <p>© <span id="year"></span> تمام حقوق محفوظ است. طراحی شده توسط <span style="color: var(--gold);">نام شما</span></p>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ==================== SLIDER SCRIPT ====================
+        // اسکریپت اسلایدر
+        document.addEventListener('DOMContentLoaded', function() {
+            // انتخاب عناصر مورد نیاز
+            const slider = document.getElementById('slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            const dots = document.querySelectorAll('.dot');
+            
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            
+            // تابع برای نمایش اسلاید فعلی
+            function showSlide(index) {
+                // حرکت اسلایدر به اسلاید مورد نظر
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                
+                // آپدیت نقاط فعال
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                currentSlide = index;
+            }
+            
+            // رفتن به اسلاید بعدی
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                showSlide(currentSlide);
+            }
+            
+            // رفتن به اسلاید قبلی
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                showSlide(currentSlide);
+            }
+            
+            // رویداد کلیک برای دکمه‌ها
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // رویداد کلیک برای نقاط
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+            
+            // اسلاید خودکار (اختیاری)
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // توقف اسلاید خودکار هنگام هاور روی اسلایدر
+            slider.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            // شروع مجدد اسلاید خودکار
+            slider.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+            
+            // ==================== OTHER SCRIPTS ====================
+            // نمایش سال جاری در فوتر
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // افکت طلایی برای عناصر
+            const goldElements = document.querySelectorAll('.btn, .portfolio-title, .logo, .slide-btn');
+            goldElements.forEach(el => {
+                el.addEventListener('mouseover', () => {
+                    el.style.textShadow = '0 0 10px var(--gold)';
+                });
+                el.addEventListener('mouseout', () => {
+                    el.style.textShadow = 'none';
+                });
+            });
+            
+            // اسکرول نرم برای لینک‌ها
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

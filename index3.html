@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سایت شخصی Mosab</title>
+  <!-- فونت اووسام برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* تنظیمات کلی صفحه */
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #121212; /* رنگ پس‌زمینه دارک */
+      color: #FFD700; /* رنگ طلایی */
+      direction: rtl;
+    }
+
+    /* هدر سایت */
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #1e1e1e;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* اسلایدر */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      width: 100%;
+      flex-shrink: 0;
+      padding: 40px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .slide h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .slide p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .slide button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #121212;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* دکمه‌های کنترل اسلایدر */
+    .slider-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .slider-controls span {
+      width: 12px;
+      height: 12px;
+      background-color: #FFD700;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* بخش نمونه‌کارها */
+    .portfolio {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .portfolio h3 {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .portfolio-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .item {
+      background-color: #1e1e1e;
+      padding: 20px;
+      width: 250px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #FFD70033;
+    }
+
+    /* فوتر سایت */
+    footer {
+      background-color: #1e1e1e;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .social-icons {
+      margin-bottom: 10px;
+    }
+
+    .social-icons a {
+      color: #FFD700;
+      margin: 0 10px;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .contact-info {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* ریسپانسیو برای موبایل */
+    @media (max-width: 600px) {
+      .slides {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .slide {
+        height: auto;
+      }
+
+      .portfolio-items {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هدر سایت -->
+  <header>
+    سایت شخصی Mosab
+  </header>
+
+  <!-- اسلایدر با ۳ اسلاید -->
+  <section class="slider">
+    <div class="slides" id="slides">
+      <!-- اسلاید اول -->
+      <div class="slide">
+        <h2>خوش آمدید</h2>
+        <p>به سایت شخصی من، جایی برای نمایش نمونه‌کارها</p>
+        <button>بیشتر بدانید</button>
+      </div>
+      <!-- اسلاید دوم -->
+      <div class="slide">
+        <h2>طراحی مدرن</h2>
+        <p>طراحی‌های مینیمال و حرفه‌ای برای وب‌سایت‌ها</p>
+        <button>مشاهده پروژه‌ها</button>
+      </div>
+      <!-- اسلاید سوم -->
+      <div class="slide">
+        <h2>همکاری با من</h2>
+        <p>برای پروژه‌های طراحی و توسعه با من در تماس باشید</p>
+        <button>ارتباط با من</button>
+      </div>
+    </div>
+    <!-- دکمه‌های کنترل اسلایدر -->
+    <div class="slider-controls">
+      <span onclick="showSlide(0)"></span>
+      <span onclick="showSlide(1)"></span>
+      <span onclick="showSlide(2)"></span>
+    </div>
+  </section>
+
+  <!-- بخش نمونه‌کارها -->
+  <section class="portfolio">
+    <h3>نمونه‌کارهای من</h3>
+    <div class="portfolio-items">
+      <!-- آیتم نمونه‌کار -->
+      <div class="item">نمونه‌کار ۱</div>
+      <div class="item">نمونه‌کار ۲</div>
+      <div class="item">نمونه‌کار ۳</div>
+    </div>
+  </section>
+
+  <!-- فوتر سایت -->
+  <footer>
+    <!-- آیکون‌های شبکه‌های اجتماعی -->
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-telegram"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <!-- اطلاعات تماس -->
+    <div class="contact-info">
+      شماره تماس: 09123456789<br>
+      ایمیل: mosab@example.com
+    </div>
+  </footer>
+
+  <!-- اسکریپت جاوااسکریپت برای کنترل اسلایدر -->
+  <script>
+    // تابع برای نمایش اسلاید مشخص
+    function showSlide(index) {
+      const slides = document.getElementById('slides');
+      slides.style.transform = 'translateX(-' + (index * 100) + '%)';
+    }
+
+    // اسلایدر خودکار هر ۵ ثانیه
+    let currentSlide = 0;
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % 3;
+      showSlide(currentSlide);
+    }, 5000);
+  </script>
+</body>
+</html>
